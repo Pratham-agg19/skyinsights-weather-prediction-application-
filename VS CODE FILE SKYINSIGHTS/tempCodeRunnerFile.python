@@ -1,0 +1,54 @@
+import requests 
+import json 
+import random
+
+appId = '71f6779186cc32448b4c412eea65b982'
+units = 'metric'
+searchTerm = input("Enter city name or zip code: ")
+
+def simulate_rain_probability():
+    probability = random.normalvariate(50, 20) 
+    return probability if probability <= 100 else 100
+
+def update_rain_probability(rain_probability):
+    print(f"Rain Probability: {rain_probability:.2f}%")
+
+def get_search_method(search_term):
+    if len(search_term) == 5 and search_term.isdigit():
+        search_method = "zip"
+    else: 
+        search_method = "q"
+        return search_method  
+
+def search_weather(search_term):
+    global search_method 
+    search_method = get_search_method(search_term)
+    url = f"http://api.openweathermap.org/data/2.5/weather?{search_method}={search_term}&APPID={appId}&units={units}"
+    response = requests.get(url)  
+    if response.status_code == 200:
+        data = json.loads(response.text)
+        rain_probability = simulate_rain_probability()
+        update_rain_probability(rain_probability)
+        init(data)
+    else:
+        print(f"Error: {response.status_code}")
+        def init(data):
+            global background_image
+            weather_condition = data['weather'][0]['main'] # Add this line weather_condition = data[‘weather’][0][‘main’]
+            if weather_condition == 'Clear':
+                background_image = "url('clearPicture.jpg')"
+            elif weather_condition == 'Clouds':
+                background_image = "url('cloudyPicture.jpg')"
+            elif weather_condition in ('Rain', 'Drizzle'):
+                background_image = "url('rainPicture.jpg')"
+            elif weather_condition == 'Mist':
+                background_image = "url('mistPicture.jpg')"
+            elif weather_condition == 'Thunderstorm':
+                background_image = "url('stormPicture.jpg')"
+            elif weather_condition == 'Snow':
+                background_image = "url('snowPicture.jpg')"
+            else:
+                background_image = None
+
+# Update UI with weather information
+# ...

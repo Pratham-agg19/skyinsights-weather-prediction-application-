@@ -1,0 +1,59 @@
+body {
+    background-image: url('default.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    color: white;
+    font-family: "Georgia", serif; /* Change to a better font style */
+}
+
+#pageContainer {
+    text-align: center;
+}
+
+#intro {
+    padding: 15px 25px;
+    background-color: black;
+    font-family: "Arial", sans-serif; /* Change to a better font style */
+}
+
+#searchPrompt {
+    padding: 5px 5px;
+    background-color: lightslategray;
+    color: whitesmoke; /* Change 'blue' to the desired color */
+}
+
+
+#searchContainer {
+    margin-top: 40px;
+}
+
+#searchContainer input {
+    width: 200px;
+}
+
+#searchContainer button {
+    background-color: pink;
+    color: white;
+    width: 100px;
+}
+
+#searchContainer button.pinkButton {
+    background-color: pink; /* Specific styling for the pink button */
+}
+/* Add styling for the probability element */
+#probability {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #555;
+}
+
+
+
+@media (min-width: 768px) {
+    #searchContainer input,
+    #searchContainer button {
+        width: 25vh;
+        height: 5vh;
+    }
+}
